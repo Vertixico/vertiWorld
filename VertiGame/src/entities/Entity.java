@@ -46,6 +46,7 @@ public class Entity implements Runnable{
 	public synchronized void move(int x, int y){
 			Field newField = myMap.getField(x, y).enter(this);
 			if(newField != null){
+				myField.leave(this);
 				this.myField = newField;
 				this.x = myField.getX();
 				this.y = myField.getY();

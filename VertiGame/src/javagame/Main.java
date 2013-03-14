@@ -13,6 +13,7 @@ public class Main extends BasicGameState{
 	private int tick, day, month, year, speed;
 	private int mouseStat;
 	private boolean pause = false;
+	private Entity focus = null;
 	
 	public Main(int state){
 		this.state = state;
@@ -41,15 +42,21 @@ public class Main extends BasicGameState{
 		g.drawString("W: Water", 	30*16 +5, e*2);
 		g.drawString("G: Grass", 	30*16 +5, e*3);
 		g.drawString("V: Vertis", 	30*16 +5, e*4);
+		g.drawString("I: See Info", 	30*16 +5, e*5);
 		
 		if(!pause){
-			g.drawString("Space for Pause", 30*16 +5, e*20);
+			g.drawString("Space for Pause", 30*16 +5, e*10);
 		}else{
-			g.drawString("<<Paused>>", 30*16 +5, e*20);
+			g.drawString("<<Paused>>", 30*16 +5, e*10);
 		}
 		
-		g.drawString("U: Faster", 30*16 +5, e*22);
-		g.drawString("I: Slower", 30*16 +5, e*23);
+		g.drawString("U: Faster", 30*16 +5, e*12);
+		g.drawString("I: Slower", 30*16 +5, e*13);
+		
+		if(this.focus != null){
+			g.drawImage(focus.getSprite(), 30*16 + 5, e*15);
+			g.drawString(focus.getName(), 30*16 + 5, e*15);
+		}
 	}
 	
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException{
@@ -111,6 +118,7 @@ public class Main extends BasicGameState{
 				break;
 			case 5:
 				world.createEntity(world.realX(input.getMouseX()), world.realY(input.getMouseY()));
+				break;
 			}
 			
 			
