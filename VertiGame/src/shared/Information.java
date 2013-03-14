@@ -8,9 +8,9 @@ import org.newdawn.slick.*;
  */
 public interface Information {
 	
-	public Graphics getSprite();
+	public Image getSprite();
 	
 	public String getName();
 	
-	public String getInfo();
+	public String[] getInfo();
 }

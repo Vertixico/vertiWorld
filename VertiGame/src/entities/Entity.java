@@ -3,8 +3,9 @@ package entities;
 import java.util.Random;
 import org.newdawn.slick.*;
 import map.*;
+import shared.*;
 
-public class Entity implements Runnable{
+public class Entity implements Runnable, Information{
 	private int x;
 	private int y;
 	private String name = "Verti";
@@ -59,5 +60,10 @@ public class Entity implements Runnable{
 	}
 	public synchronized int getY(){
 		return this.y;
+	}
+	
+	public String[] getInfo(){
+		String[] a = {"This is a basic Verti"};
+		return a;
 	}
 }

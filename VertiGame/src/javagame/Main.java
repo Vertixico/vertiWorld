@@ -38,20 +38,22 @@ public class Main extends BasicGameState{
 		
 		int d = 30*16 +5;
 		int e = 15;
-		g.drawString("Placing...:", 30*16 +5, e*1);
-		g.drawString("W: Water", 	30*16 +5, e*2);
-		g.drawString("G: Grass", 	30*16 +5, e*3);
-		g.drawString("V: Vertis", 	30*16 +5, e*4);
-		g.drawString("I: See Info", 	30*16 +5, e*5);
+		g.drawString("Placing...:", d, e*1);
+		g.drawString("W: Water", 	d, e*2);
+		g.drawString("G: Grass", 	d, e*3);
+		g.drawString("V: Vertis", 	d, e*4);
+		g.drawString("I: See Info", 	d, e*5);
 		
 		if(!pause){
-			g.drawString("Space for Pause", 30*16 +5, e*10);
+			g.drawString("Space for Pause", d, e*10);
 		}else{
-			g.drawString("<<Paused>>", 30*16 +5, e*10);
+			g.drawString("<<Paused>>", d, e*10);
 		}
 		
-		g.drawString("U: Faster", 30*16 +5, e*12);
-		g.drawString("I: Slower", 30*16 +5, e*13);
+		g.drawString("U: Faster", d, e*12);
+		g.drawString("I: Slower", d, e*13);
+		
+		g.drawString("Entities:" + world.countEntity() , d, e*7);
 		
 		if(this.focus != null){
 			g.drawImage(focus.getSprite(), 30*16 + 5, e*15);

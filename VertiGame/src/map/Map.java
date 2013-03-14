@@ -139,6 +139,12 @@ public class Map {
 	public void removeEntity(Entity e){
 		entities.remove(e);
 	}
+	public int countEntity(){
+		if(this.entities != null){
+			return this.entities.size() + 1;
+		}
+		return 0;
+	}
 	
 	/*
 	 * Running the action
