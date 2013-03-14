@@ -8,6 +8,8 @@ public abstract class Tile implements Runnable{
 	public 	static final 	int 			xSize = 16;
 	public 	static final 	int 			ySize = 16;
 	
+	private String name;
+	
 	public static void init(){
 		//Import of the spritesheet for tiles
 		try{
@@ -26,6 +28,12 @@ public abstract class Tile implements Runnable{
 		case 1: 	return new Grass();
 		default: 	return new Water();
 		}
+	}
+	public void setName(String name){
+		this.name = name;
+	}
+	public String getName(){
+		return name;
 	}
 	public SpriteSheet getTiles(){
 		return tiles;

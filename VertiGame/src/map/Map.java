@@ -35,10 +35,11 @@ public class Map {
 		//Filling the field with a border of water and some grass
 		createFields();
 		addActive(20,20);
-		addEntity(new Entity(getField(20,20), "Dummi", this));
-		addEntity(new Entity(getField(21,20), "Dummi", this));
-		addEntity(new Entity(getField(22,20), "Dummi", this));
-		addEntity(new Entity(getField(23,20), "Dummi", this));
+		addEntity(new Entity(getField(20,20), "Albert", this));
+		addEntity(new Entity(getField(21,20), "Billy", this));
+		addEntity(new Entity(getField(22,20), "Corbi", this));
+		addEntity(new Entity(getField(23,20), "Detlef", this));
+		addEntity(new Entity(getField(30,30), "Isa", this));
 	}
 	
 	private void createFields(){
@@ -74,14 +75,14 @@ public class Map {
 		return mapToCoord(px) + offsetX;
 	}
 	public static int realY(int px){
-		return mapToCoord(px) + offsetX;
+		return mapToCoord(px) + offsetY;
 	}
 	
 	public void drawMap(Graphics g){
 		for(int i=0; i<screenDimX; i++){
 			for(int j=0; j<screenDimY; j++){
 				try{
-				g.drawImage(field[i+offsetX][j+offsetY].getTile().getSprite(),mapToPx(i),mapToPx(j));
+				g.drawImage(field[i+offsetX][j+offsetY].getSprite(),mapToPx(i),mapToPx(j));
 				}catch(IndexOutOfBoundsException e){
 				
 				}

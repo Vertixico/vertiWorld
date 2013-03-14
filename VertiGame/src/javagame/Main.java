@@ -6,6 +6,7 @@ import org.newdawn.slick.state.*;
 
 import entities.Entity;
 import map.*;
+import shared.*;
 
 public class Main extends BasicGameState{
 	private int state;
@@ -13,7 +14,7 @@ public class Main extends BasicGameState{
 	private int tick, day, month, year, speed;
 	private int mouseStat;
 	private boolean pause = false;
-	private Entity focus = null;
+	private InformationAccess focus = null;
 	
 	public Main(int state){
 		this.state = state;
@@ -38,11 +39,11 @@ public class Main extends BasicGameState{
 		
 		int d = 30*16 +5;
 		int e = 15;
-		g.drawString("Placing...:", d, e*1);
-		g.drawString("W: Water", 	d, e*2);
-		g.drawString("G: Grass", 	d, e*3);
-		g.drawString("V: Vertis", 	d, e*4);
-		g.drawString("I: See Info", 	d, e*5);
+		g.drawString("Placing...:",		d, e*1);
+		g.drawString("W: Water", 		d, e*2);
+		g.drawString("G: Grass", 		d, e*3);
+		g.drawString("V: Vertis", 		d, e*4);
+		g.drawString("D: See Data", 	d, e*5);
 		
 		if(!pause){
 			g.drawString("Space for Pause", d, e*10);
@@ -56,8 +57,9 @@ public class Main extends BasicGameState{
 		g.drawString("Entities:" + world.countEntity() , d, e*7);
 		
 		if(this.focus != null){
-			g.drawImage(focus.getSprite(), 30*16 + 5, e*15);
-			g.drawString(focus.getName(), 30*16 + 5, e*15);
+			g.drawString("Infos:", d, e*15);
+			g.drawImage(focus.getSprite(), d, e*16);
+			g.drawString(focus.getName(), d + 50, e*16);
 		}
 	}
 	
@@ -93,6 +95,10 @@ public class Main extends BasicGameState{
 			System.out.println("Now placing vertis");
 			mouseStat = 5;
 		}
+		if(input.isKeyDown(Input.KEY_D)){	//See Infos
+			System.out.println("Now getting Data");
+			mouseStat = 10;
+		}
 		
 		if(input.isKeyDown(Input.KEY_U)){	//Faster
 			if(speed < 9){
@@ -121,6 +127,8 @@ public class Main extends BasicGameState{
 			case 5:
 				world.createEntity(world.realX(input.getMouseX()), world.realY(input.getMouseY()));
 				break;
+			case 10:
+				focus = getFocus(world.realX(input.getMouseX()), world.realY(input.getMouseY()));
 			}
 			
 			
@@ -156,6 +164,14 @@ public class Main extends BasicGameState{
 		}catch(InterruptedException e){}
 	}
 	
+	private InformationAccess getFocus(int x, int y){
+		
+		Field f = world.getField(x,y);
+		if(f.hasVisitor()){
+			return f.firstVisitor();
+		}
+		return f;
+	}
 	public int getID(){
 		return this.state;
 	}

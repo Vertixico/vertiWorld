@@ -5,7 +5,7 @@ import org.newdawn.slick.*;
 import map.*;
 import shared.*;
 
-public class Entity implements Runnable, Information{
+public class Entity implements Runnable, InformationAccess{
 	private int x;
 	private int y;
 	private String name = "Verti";

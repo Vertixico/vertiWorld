@@ -1,13 +1,15 @@
 package map;
 
+import shared.InformationAccess;
 import tile.*;
 import org.newdawn.slick.*;
+
 import entities.*;
 import items.*;
 
 import java.util.*;
 
-public class Field {
+public class Field implements InformationAccess{
 	private int x;
 	private int y;
 	
@@ -43,7 +45,12 @@ public class Field {
 		visitor.remove(e);
 	}
 	
-	public synchronized Entity getVisitor(){
+
+	public synchronized boolean hasVisitor(){
+		return !visitor.isEmpty();
+	}
+	
+	public synchronized Entity firstVisitor(){
 		if(!visitor.isEmpty()){
 			return visitor.get(0);
 		}
@@ -82,6 +89,23 @@ public class Field {
 	}
 	public int getY(){
 		return this.y;
+	}
+
+	@Override
+	public Image getSprite() {
+		return getTile().getSprite();
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return "Feld";
+	}
+
+	@Override
+	public String[] getInfo() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
