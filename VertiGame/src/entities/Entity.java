@@ -4,7 +4,11 @@ import java.util.Random;
 import org.newdawn.slick.*;
 import map.*;
 import shared.*;
-
+/*
+ * Manages Entities that can be displayed on the map, actively walk around or do stuff, 
+ * interact with tiles and with each other. Entities are visibly placed on the map.
+ *  
+ */
 public class Entity implements Runnable, InformationAccess{
 	private int x;
 	private int y;
@@ -25,6 +29,59 @@ public class Entity implements Runnable, InformationAccess{
 		}catch(SlickException e){}
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see shared.InformationAccess#getInfo()
+	 */
+	public String[] getInfo(){
+		String[] a = {"This is a basic Verti"};
+		return a;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see shared.InformationAccess#getName()
+	 */
+	public String getName(){
+		return this.name;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see shared.InformationAccess#getSprite()
+	 */
+	public Image getSprite(){
+		return sprite;
+	}
+	
+	/*
+	 * @returns The current x coordinate of the Entity
+	 */
+	public synchronized int getX(){
+		return this.x;
+	}
+	/*
+	 * @returns The current y coordinate of the Entity
+	 */
+	public synchronized int getY(){
+		return this.y;
+	}
+	/*
+	 * Let the entity move to the designated coordinates.
+	 * The method then checks if the corresponding field is acessable and then
+	 * updates the according references.
+	 */
+	public synchronized void move(int x, int y){
+			Field newField = myMap.getField(x, y).enter(this);
+			if(newField != null){
+				myField.leave(this);
+				this.myField = newField;
+				this.x = myField.getX();
+				this.y = myField.getY();
+			
+			}
+			
+	}
 	public synchronized void run(){
 		
 		int r = new Random().nextInt(4);
@@ -37,33 +94,5 @@ public class Entity implements Runnable, InformationAccess{
 		
 	}
 	
-	public String getName(){
-		return this.name;
-	}
-	public Image getSprite(){
-		return sprite;
-	}
 	
-	public synchronized void move(int x, int y){
-			Field newField = myMap.getField(x, y).enter(this);
-			if(newField != null){
-				myField.leave(this);
-				this.myField = newField;
-				this.x = myField.getX();
-				this.y = myField.getY();
-			
-			}
-			
-	}
-	public synchronized int getX(){
-		return this.x;
-	}
-	public synchronized int getY(){
-		return this.y;
-	}
-	
-	public String[] getInfo(){
-		String[] a = {"This is a basic Verti"};
-		return a;
-	}
 }
