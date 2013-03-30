@@ -81,12 +81,39 @@ public class Field implements InformationAccess{
 		return null;
 	}
 	
+	/*
+	 * @returns if the field can generally be entered by an entity
+	 */
 	public boolean isPassable(){
 		return getTile().isPassable();
 	}
+	/*
+	 * @returns if the field can be entered by this entity
+	 */
+	public boolean isPassable(Entity e){
+		return isPassable();
+	}
+	/*
+	 * @returns if the field can generally be left by an entity
+	 */
+	public boolean isLeaveable(){
+		return true;
+	}
+	/*
+	 * @returns if the entity can leave this field
+	 */
+	public boolean isLeaveable(Entity e){
+		return isLeaveable();
+	}
+	/*
+	 * @returns the x-coordinate on the map of this field
+	 */
 	public int getX(){
 		return this.x;
 	}
+	/*
+	 * @returns the y-coordinate on the map of this field
+	 */
 	public int getY(){
 		return this.y;
 	}

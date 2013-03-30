@@ -3,7 +3,7 @@ package map;
 import java.util.*;
 import java.util.concurrent.*;
 import entities.*;
-
+import action.Action;
 import tile.*;
 import org.newdawn.slick.*;
 
@@ -40,6 +40,9 @@ public class Map {
 		addEntity(new Entity(getField(22,20), "Corbi", this));
 		addEntity(new Entity(getField(23,20), "Detlef", this));
 		addEntity(new Entity(getField(30,30), "Isa", this));
+		
+		//Important:
+		Action.init(this); //Giving Actions the ability to access this map
 	}
 	
 	private void createFields(){
@@ -70,7 +73,7 @@ public class Map {
 	public static int mapToCoord(int xPx){
 		return (int) (xPx / 16);
 	}
-
+	
 	public static int realX(int px){
 		return mapToCoord(px) + offsetX;
 	}
